@@ -1,0 +1,24 @@
+name: Build and push
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build container image
+        id: build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          archs: arm64
+          image: raspberry-pi-os
+          tags: latest ${{ github.sha }}
+      - name: Push To Registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build.outputs.image }}
+          tags: ${{ steps.build.outputs.tags }}
+          registry: ghcr.io/lina-bh
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+
