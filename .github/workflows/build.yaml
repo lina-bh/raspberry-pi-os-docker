@@ -12,7 +12,8 @@ jobs:
           archs: arm64
           image: raspberry-pi-os
           tags: latest ${{ github.sha }}
-      - name: Push To Registry
+          containerfiles: ./Dockerfile
+      - name: Push to ghcr
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build.outputs.image }}
@@ -20,5 +21,3 @@ jobs:
           registry: ghcr.io/lina-bh
           username: ${{ github.actor }}
           password: ${{ github.token }}
-
-
