@@ -14,7 +14,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           archs: arm64
-          image: raspberry-pi-os
+          image: ${{ github.event.repository.name }}
           tags: latest ${{ github.sha }}
           containerfiles: ./Dockerfile
       - name: Push to ghcr
