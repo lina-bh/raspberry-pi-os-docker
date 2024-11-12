@@ -4,3 +4,4 @@ RUN echo 'deb http://archive.raspberrypi.com/debian/ bookworm main' >> /etc/apt/
 RUN apt-get update --allow-insecure-repositories
 RUN apt-get install -y --allow-unauthenticated raspberrypi-archive-keyring
 RUN apt-get update
+RUN apt-get -y full-upgrade
